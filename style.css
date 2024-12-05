@@ -1,0 +1,183 @@
+/* ===== CSS ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif; /* Police utilisée */
+}
+
+body {
+    height: 100vh; /* Hauteur de la page à 100% de la fenêtre */
+    display: flex; /* Affichage en flexbox */
+    align-items: center; /* Centrage vertical */
+    justify-content: center; /* Centrage horizontal */
+    background-color: #4070f4; /* Couleur de fond */
+}
+
+.container {
+    position: relative;
+    max-width: 430px; /* Largeur maximale du conteneur */
+    width: 100%; /* Largeur à 100% */
+    background: #fff; /* Fond blanc */
+    border-radius: 10px; /* Bords arrondis */
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1); /* Ombre du conteneur */
+    overflow: hidden; /* Contenu qui déborde masqué */
+    margin: 0 20px; /* Marges latérales */
+}
+
+.container .forms {
+    display: flex; /* Affichage en flexbox */
+    align-items: center; /* Alignement vertical */
+    height: 500px; /* Hauteur initiale */
+    width: 200%; /* Largeur pour contenir deux formulaires */
+    transition: height 0.2s ease; /* Transition fluide pour la hauteur */
+}
+
+.container .form {
+    width: 50%; /* Chaque formulaire occupe 50% */
+    padding: 30px; /* Espacement interne */
+    background-color: #fff; /* Fond blanc */
+    transition: margin-left 0.18s ease; /* Transition fluide pour le décalage */
+}
+
+.container.active .login {
+    margin-left: -50%; /* Cache le formulaire de connexion */
+    opacity: 0; /* Rendre le formulaire invisible */
+    transition: margin-left 0.18s ease, opacity 0.15s ease; /* Transition pour la visibilité */
+}
+
+.container .signup {
+    opacity: 0; /* Formulaire d'inscription caché au départ */
+    transition: opacity 0.09s ease; /* Transition fluide pour l'opacité */
+}
+
+.container.active .signup {
+    opacity: 1; /* Affiche le formulaire d'inscription */
+    transition: opacity 0.2s ease; /* Transition pour l'affichage */
+}
+
+.container.active .forms {
+    height: 700px; /* Augmente la hauteur pour le formulaire d'inscription */
+}
+
+.container .form .title {
+    position: relative; /* Position relative pour les pseudo-éléments */
+    font-size: 27px; /* Taille du texte */
+    font-weight: 600; /* Poids du texte */
+}
+
+.form .title::before {
+    content: ''; /* Pseudo-élément avant le titre */
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 3px; /* Hauteur de la ligne */
+    width: 30px; /* Longueur de la ligne */
+    background-color: #4070f4; /* Couleur de la ligne */
+    border-radius: 25px; /* Bords arrondis */
+}
+
+.form .input-field {
+    position: relative; /* Position pour aligner les icônes */
+    height: 50px; /* Hauteur des champs */
+    width: 100%; /* Largeur des champs */
+    margin-top: 20px; /* Espacement entre les champs */
+}
+
+.input-field input {
+    position: absolute;
+    height: 100%; /* Hauteur du champ */
+    width: 100%; /* Largeur du champ */
+    padding: 0 35px; /* Espacement interne */
+    border: none; /* Pas de bordure */
+    outline: none; /* Désactive les contours par défaut */
+    font-size: 16px; /* Taille de la police */
+    border-bottom: 2px solid #ccc; /* Bordure inférieure grise */
+    border-top: 2px solid transparent; /* Bordure supérieure transparente */
+    transition: all 0.2s ease; /* Transition fluide */
+}
+
+.input-field input:focus,
+.input-field input:valid {
+    border-bottom-color: #4070f4; /* Bordure bleue si le champ est valide ou actif */
+}
+
+.input-field i {
+    position: absolute;
+    top: 50%; /* Centré verticalement */
+    transform: translateY(-50%); /* Ajustement du centrage */
+    color: #999; /* Couleur grise */
+    font-size: 23px; /* Taille de l'icône */
+    transition: all 0.2s ease; /* Transition fluide */
+}
+
+.input-field input:focus ~ i,
+.input-field input:valid ~ i {
+    color: #4070f4; /* Change la couleur de l'icône si le champ est actif ou valide */
+}
+
+.input-field i.icon {
+    left: 0; /* Position de l'icône à gauche */
+}
+
+.input-field i.showHidePw {
+    right: 0; /* Position de l'icône œil à droite */
+    cursor: pointer; /* Curseur en forme de main */
+    padding: 10px; /* Espacement autour de l'icône */
+}
+
+.form .checkbox-text {
+    display: flex; /* Affichage en flexbox */
+    align-items: center; /* Alignement vertical */
+    justify-content: space-between; /* Espacement entre les éléments */
+    margin-top: 20px; /* Espacement au-dessus */
+}
+
+.checkbox-text .checkbox-content {
+    display: flex; /* Alignement horizontal */
+    align-items: center; /* Alignement vertical */
+}
+
+.checkbox-content input {
+    margin-right: 10px; /* Espacement entre la case à cocher et le texte */
+    accent-color: #4070f4; /* Couleur de la case à cocher */
+}
+
+.form .text {
+    color: #333; /* Couleur du texte */
+    font-size: 14px; /* Taille du texte */
+}
+
+.form a.text {
+    color: #4070f4; /* Couleur des liens */
+    text-decoration: none; /* Pas de soulignement */
+}
+
+.form a.text:hover {
+    text-decoration: underline; /* Soulignement au survol */
+}
+
+.form .button {
+    margin-top: 35px; /* Espacement au-dessus du bouton */
+}
+
+.form .button input {
+    border: none; /* Pas de bordure */
+    color: #fff; /* Texte blanc */
+    font-size: 17px; /* Taille de la police */
+    font-weight: 500; /* Poids du texte */
+    letter-spacing: 1px; /* Espacement entre les lettres */
+    border-radius: 6px; /* Bords arrondis */
+    background-color: #4070f4; /* Couleur de fond bleue */
+    cursor: pointer; /* Curseur en forme de main */
+    transition: all 0.3s ease; /* Transition fluide */
+}
+
+.form .button input:hover {
+    background-color: #265df2; /* Couleur plus foncée au survol */
+}
+
+.form .login-signup {
+    margin-top: 20px; /* Espacement au-dessus */
+    text-align: center; /* Texte centré */
+}

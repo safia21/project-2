@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Importation des icônes depuis Iconscout -->
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+
+    <!-- Inclusion du fichier CSS pour le style principal -->
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        /* Styles pour les messages d'erreur */
+        .error-message {
+            display: none; /* Par défaut, le message est masqué */
+            padding: 10px;
+            background-color: #f44336; /* Couleur de fond rouge pour les erreurs */
+            color: white;
+            border-radius: 5px;
+            text-align: center;
+            margin-bottom: 20px;
+            opacity: 0; /* Initialement transparent */
+            transition: opacity 0.5s ease-in-out; /* Transition pour l'apparition */
+        }
+    
+        .error-message.show {
+            display: block; /* Affiche le message */
+            opacity: 1; /* Rendre le message visible */
+        }
+    
+        .btn-red {
+            background-color: red;
+            color: white;
+            border: 1px solid red;
+            margin-left: 190px;
+            margin-bottom: 20px; /* Espacement en bas */
+            transition: background-color 0.3s, color 0.3s; /* Animation des couleurs */
+            font-size: 10px; /* Taille de la police */
+            padding: 10px 10px; /* Espace intérieur du bouton */
+        }
+    
+        .btn-red:hover {
+            background-color: darkred; /* Couleur au survol */
+            border-color: darkred;
+        }
+    </style>
+    
+    <title>S.O.A</title>
+    <link rel="icon" href="" alt="icon" type="image/x-icon">
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="forms">
+            <!-- Formulaire de connexion -->
+            <div class="form login">
+                <span class="title">Connexion
+                    <button class="btn btn-red" onclick="navigateToPage()">X</button>
+                </span>
+
+                <!-- Script pour redirection -->
+                <script>
+                    function navigateToPage() {
+                        // Redirection vers la page d'accueil
+                        window.location.href = 'indx.html';
+                    }
+                </script>
+                
+                <!-- Message d'erreur affiché dynamiquement -->
+                <div id="error-message" class="error-message"></div>
+
+                <!-- Formulaire HTML -->
+                <form id="loginForm" action="login.php" method="POST">
+                    <div class="input-field">
+                        <input type="text" name="email" id="login-email" placeholder="Entrez votre email" required>
+                        <i class="uil uil-envelope icon"></i>
+                    </div>
+                    <div class="input-field">
+                        <input type="password" name="mot_de_passe" id="login-password" class="password"
+                            placeholder="Entrez votre mot de passe" required>
+                        <i class="uil uil-lock icon"></i>
+                        <i class="uil uil-eye-slash showHidePw"></i>
+                    </div>
+
+                    <div class="checkbox-text">
+                        <a href="mot_de_passe_oublier.php" class="text">Mot de passe oublié ?</a>
+                    </div>
+
+                    <div class="input-field button">
+                        <input type="submit" value="Connexion">
+                    </div>
+                </form>
+
+                <div class="login-signup">
+                    <span class="text">Pas encore membre ?
+                        <a href="#" class="text signup-link">Inscrivez-vous maintenant</a>
+                    </span>
+                </div>
+            </div>
+
+            <!-- Formulaire d'inscription -->
+            <div class="form signup">
+                <span class="title">Inscription</span>
+
+                <form id="signupForm" action="signup.php" method="POST">
+                    <div class="input-field">
+                        <input type="text" name="prenom" id="prenom" placeholder="Entrez votre prénom" required>
+                        <i class="uil uil-user"></i>
+                    </div>
+                    <div class="input-field">
+                        <input type="text" name="nom" id="nom" placeholder="Entrez votre nom" required>
+                        <i class="uil uil-user"></i>
+                    </div>
+                    <div class="input-field">
+                        <input type="email" name="email" id="signup-email" placeholder="Entrez votre email" required>
+                        <i class="uil uil-envelope icon"></i>
+                    </div>
+                    <div class="input-field">
+                        <input type="password" name="mot_de_passe" id="signup-password" class="password"
+                            placeholder="Créez un mot de passe" required>
+                        <i class="uil uil-lock icon"></i>
+                    </div>
+                    <div class="input-field">
+                        <input type="password" name="confirm_password" id="confirm_password" class="password"
+                            placeholder="Confirmez le mot de passe" required>
+                        <i class="uil uil-lock icon"></i>
+                        <i class="uil uil-eye-slash showHidePw"></i>
+                    </div>
+
+                    <div class="input-field button">
+                        <input type="submit" value="Inscription">
+                    </div>
+                </form>
+
+                <div class="login-signup">
+                    <span class="text">Déjà membre ?
+                        <a href="#" class="text login-link">Connectez-vous maintenant</a>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Gestion des messages d'erreur selon les paramètres dans l'URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const error = urlParams.get('error');
+        const errorMessage = document.getElementById('error-message');
+
+        if (error === 'wrong_password') {
+            errorMessage.textContent = 'Mot de passe incorrect. Veuillez réessayer.';
+            errorMessage.classList.add('show');
+        } else if (error === 'email_not_found') {
+            errorMessage.textContent = 'Email non trouvé. Veuillez vérifier votre email.';
+            errorMessage.classList.add('show');
+        } else if (error === 'email_exists') {
+            errorMessage.textContent = 'Cet email est déjà enregistré.';
+            errorMessage.classList.add('show');
+        } else if (error === 'signup_failed') {
+            errorMessage.textContent = 'L\'inscription a échoué. Veuillez réessayer plus tard.';
+            errorMessage.classList.add('show');
+        }
+
+        // Optionnel : Masquer le message après 5 secondes
+        setTimeout(() => {
+            errorMessage.classList.remove('show');
+        }, 5000);
+    </script>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
